@@ -2,12 +2,19 @@
 # If the tests pass and a manual check that readme.md looks good, commit and push
 import unittest
 from export_books import ImportPratchett, ExportHTML, ExportMarkdown, MergeMarkDown, ExportCompactMarkdown
+from export_books import Title
 
+# input files
 data_file = 'data.csv'
+used_sprints_file = 'used.csv'
+template_file = 'template.md'
+
+# output files
+merge_file = 'README.md'
 html_file = 'index.html'
 markdown_file = 'index.md'
-template_file = 'template.md'
-merge_file = 'README.md'
+
+
 
 class ImporterTests(unittest.TestCase):
     def test_import_csv(self):
@@ -18,6 +25,56 @@ class ImporterTests(unittest.TestCase):
         assert(csv[0] == ['book','blurb','seq','class'])
         assert len(csv) > 10
 
+    def test_import_used_sprints(self):
+        """
+        if used_sprints_file is none, ignore this test
+        """
+        if used_sprints_file:
+            importer = ImportPratchett()
+            used = importer.import_csv(used_sprints_file)
+            assert (used[0] == ['book'])
+            used = used[1::]
+            used = [Title(item) for sublist in used for item in sublist]
+
+            csv = importer.import_csv(data_file)
+            csv = csv[1::]
+            for row in csv:
+                if Title(row[0]) in used:
+                    print("U {}".format(row[0]))
+                else:
+                    print("F {}".format(row[0]))
+
+    def test_merge_used_sprints(self):
+        if used_sprints_file:
+            importer = ImportPratchett()
+            used = importer.import_csv(used_sprints_file)
+            assert (used[0] == ['book'])
+            used = used[1::]
+            used = [Title(item) for sublist in used for item in sublist]
+
+            csv = importer.import_csv(data_file)
+            csv_data = csv[1::]
+            table_unused_books = [csv[0]]
+            table_used_books = table_unused_books[:]
+            for row in csv_data:
+                if Title(row[0]) in used:
+                    print("U {}".format(row[0]))
+                    table_used_books.append(row)
+                else:
+                    print("F {}".format(row[0]))
+                    table_unused_books.append(row)
+
+            md = ExportCompactMarkdown()
+            used_text = md.export_mark_down(table_used_books, ['Used Titles'])
+            unused_text = md.export_mark_down(table_unused_books, ['Remaining Titles'])
+            with open(template_file) as f:
+                template = f.readlines()
+            text = unused_text + "\r\n\r\n" + used_text
+            transformed = "".join(template).replace("<TABLE>", text)
+            generated = transformed.replace("<GENERATED>", "Note: This file was generated from {}".format(template_file))
+            md.save_text(generated, merge_file)  # readme.md
+
+
 class ExporterTests(unittest.TestCase):
     def test_export_html(self):
         imp = ImportPratchett()
@@ -26,7 +83,7 @@ class ExporterTests(unittest.TestCase):
         assert len(html)
         # export again, but the short form with just links
         html = ExportHTML()
-        text = html.export_html(csv, ['Title'], ExportHTML._compactrender)
+        text = html.export_html(csv, ['Title'])
         # save to file
         ExportHTML.save_text(text, html_file)
 
@@ -50,7 +107,10 @@ class MergeTests(unittest.TestCase):
             template = f.readlines()
         transformed = "".join(template).replace("<TABLE>", text)
         generated = transformed.replace("<GENERATED>", "Note: This file was generated from {}".format(template_file))
-        md.save_text(generated, merge_file)  # readme.md
+        merge_file_name = merge_file
+        if used_sprints_file:
+            merge_file_name += ".1"
+        md.save_text(generated, merge_file_name)  # readme.md
 
 
 if __name__ == '__main__':
