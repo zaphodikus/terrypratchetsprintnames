@@ -25,25 +25,10 @@ class Title:
         return cleaned.strip()
 
     def __eq__(self, other):
-        #left = self.item.lower()
-        left = self.clean()
         if isinstance(other, self.__class__):
-            right = other.clean()
-        else:  # a normal string
-            right = Title(other).clean()
-
-        # if isinstance(other, self.__class__):
-        #     right = other.item.lower()
-        # else:  # a normal string
-        #     right = str(other)
-        # left = left.split(':')[0]  # strip any subtitle away
-        # right = right.split(':')[0]
-        # for r in ",?^!":
-        #     left = left.replace(r, "")
-        #     right = right.replace(r, "")
-        # left = left.strip()
-        # right = right.strip()
-        return left == right
+            return self.clean() == other.clean()
+        else:  # assume, a normal string
+            return self.clean() == Title(other).clean()
 
     def __ne__(self, other):
         return not self.__eq__(other)
@@ -52,7 +37,8 @@ class Title:
 class ImportPratchett(object):
 
     @staticmethod
-    def encoding (filename):
+    def encoding(filename):
+        """ returns the best encoding to use when opening a file """
         bytes = min(32, os.path.getsize(filename))
         raw = open(filename, 'rb').read(bytes)
 
@@ -62,7 +48,6 @@ class ImportPratchett(object):
             result = chardet.detect(raw)
             encoding = result['encoding']
         return encoding
-
 
     def import_csv(self, file):
         result = []
@@ -108,14 +93,14 @@ class ExportHTML(TextSaver):
     def export_html(self, books, headings, rowrender=_rowrender):
         html = """<html><table border="1">
 """
-        def makeheading(row, indent=2):
+        def make_heading(row, indent=2):
             h = "{}<tr>".format(' '*indent)
             for item in row:
                 h+= "<th>{}</th>".format(item)
             h+= "\n{}</tr>".format(' '*indent)
             return h
 
-        def makerow(row, rowrender, indent=2):
+        def make_row(row, rowrender, indent=2):
             if callable(rowrender):
                 return rowrender(row)
             else:
@@ -124,9 +109,9 @@ class ExportHTML(TextSaver):
         head = None
         for row in books:
             if head:
-                html += makerow(row, rowrender)
+                html += make_row(row, rowrender)
             else:
-                head = makeheading(headings)
+                head = make_heading(headings)
                 html += head
         html += "</table></html>"
         return html
@@ -139,21 +124,16 @@ class ExportMarkdown(TextSaver):
     def getvalue(self):
         return self.export_mark_down(self._books, headings=["Title", "Link", "Hash", "Book type"])
 
-    @staticmethod
-    def save_text(text, filename):
-        with open(filename, "w") as f:
-            f.write(text)
-
-    def makerow(self, row):
+    def make_row(self, row):
         r = "|"
         for item in row:
             r += " {} |".format(item)
         r += "\n"
         return r
 
-    def makeheading(self, row):
+    def make_heading(self, row):
         h = "\n"
-        h += self.makerow(row)
+        h += self.make_row(row)
         for item in row:
             h += "| --- "
         h += "|\n"
@@ -163,9 +143,9 @@ class ExportMarkdown(TextSaver):
         mark_down = None
         for row in books:
             if mark_down:
-                mark_down += self.makerow(row)
+                mark_down += self.make_row(row)
             else:
-                mark_down = self.makeheading(headings)
+                mark_down = self.make_heading(headings)
         return mark_down
 
 
@@ -176,13 +156,13 @@ class ExportCompactMarkdown(ExportMarkdown):
     def getvalue(self):
         pass # do not call!
 
-    def makerow(self,row):
+    def make_row(self, row):
         """ All we do is redefine the row helpers
         """
         r = "| [{}]({}) |\n".format(row[0], row[1])
         return r
 
-    def makeheading(self, head):
+    def make_heading(self, head):
         h = "\n|"
         for item in head:
             h += " {} |".format(item)
