@@ -6,13 +6,10 @@ Please do not fork or copy or download the result for redistribution, (although 
 
 | Remaining Titles |
 | --- |
-| [A Hat Full of Sky](https://www.hjkeen.net/halqn/discwlds.htm#hat_full) |
 | [Eric](https://www.hjkeen.net/halqn/dscwldr3.htm) |
 | [Feet of Clay](https://www.hjkeen.net/halqn/dscwldc3.htm) |
-| [Hogfather](https://www.hjkeen.net/halqn/dscwldd4.htm) |
 | [I Shall Wear Midnight](http://www.worldcat.org/oclc/526057897) |
 | [Jingo](https://www.hjkeen.net/halqn/dscwldc4.htm) |
-| [Johnny and the Bomb](https://www.hjkeen.net/halqn/johnnym2.htm#bomb) |
 | [Johnny and the Dead](https://www.hjkeen.net/halqn/johnny_m.htm#thedead) |
 | [Lords and Ladies](https://www.hjkeen.net/halqn/dscwldw3.htm) |
 | [Monstrous Regiment](https://www.hjkeen.net/halqn/discwld2.htm) |
@@ -22,7 +19,6 @@ Please do not fork or copy or download the result for redistribution, (although 
 | [The Amazing Maurice and his Educated Rodents](http://www.worldcat.org/oclc/47625356) |
 | [The Last Continent](https://www.hjkeen.net/halqn/dscwldr5.htm) |
 | [The Truth](https://www.hjkeen.net/halqn/dscwlde2.htm) |
-| [The Wee Free Men](https://www.hjkeen.net/halqn/discwlds.htm#weefree) |
 | [Thud!](https://www.hjkeen.net/halqn/dscwldc7.htm) |
 | [World of Poo](http://www.worldcat.org/oclc/779864032) |
 | [Unseen Academicals](https://www.hjkeen.net/halqn/dscwldr6.htm) |
@@ -33,12 +29,15 @@ Please do not fork or copy or download the result for redistribution, (although 
 | Used Titles |
 | --- |
 | [A Blink of the Screen : collected short fiction](http://www.worldcat.org/oclc/796277033) |
+| [A Hat Full of Sky](https://www.hjkeen.net/halqn/discwlds.htm#hat_full) |
 | [Carpe Jugulum](https://www.hjkeen.net/halqn/dscwldw5.htm) |
 | [Equal Rites](https://www.hjkeen.net/halqn/discwldw.htm#eqrites) |
 | [Going Postal](https://www.hjkeen.net/halqn/dscwlde3.htm) |
 | [Good Omens](https://www.hjkeen.net/halqn/goodomen.htm) |
 | [Guards! Guards!](https://www.hjkeen.net/halqn/dscwldc1.htm) |
+| [Hogfather](https://www.hjkeen.net/halqn/dscwldd4.htm) |
 | [Interesting Times](https://www.hjkeen.net/halqn/discwldr.htm#inttimes) |
+| [Johnny and the Bomb](https://www.hjkeen.net/halqn/johnnym2.htm#bomb) |
 | [Making Money](https://www.hjkeen.net/halqn/dscwlde4.htm) |
 | [Maskerade](https://www.hjkeen.net/halqn/dscwldw4.htm) |
 | [Men at Arms](https://www.hjkeen.net/halqn/dscwldc2.htm) |
@@ -54,6 +53,7 @@ Please do not fork or copy or download the result for redistribution, (although 
 | [The Fifth Elephant](https://www.hjkeen.net/halqn/dscwldc5.htm) |
 | [The Last Hero: a Discworld Fable](https://www.hjkeen.net/halqn/discwldr.htm#lasthero) |
 | [The Light Fantastic](https://www.hjkeen.net/halqn/dscwldr1.htm#light) |
+| [The Wee Free Men](https://www.hjkeen.net/halqn/discwlds.htm#weefree) |
 | [Wintersmith](https://www.hjkeen.net/halqn/discwlds.htm#wntrsmth) |
 | [Witches Abroad](https://www.hjkeen.net/halqn/dscwldw2.htm) |
 | [Wyrd Sisters](https://www.hjkeen.net/halqn/discwldw.htm#wyrdsis) |

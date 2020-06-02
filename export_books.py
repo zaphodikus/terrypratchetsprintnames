@@ -19,9 +19,20 @@ class Title:
         return self.item
 
     def clean(self):
+        # discard any subtitle names that appear after a colon
         cleaned = self.item.lower().split(":")[0]
-        for r in ",?^!":
+        while "  " in cleaned:
+            cleaned = cleaned.replace("  ", " ")
+        for r in ",?^!'-":
             cleaned = cleaned.replace(r, "")
+        # eat certain words anywhere
+        cleaned = cleaned.replace(" and ", " ")
+        cleaned = cleaned.replace(" & ", " ")
+        # eat these leading words
+        for word in ["the ", "a ", "an "]:
+            length = len(word)
+            if cleaned[0:length] == word:
+                cleaned = cleaned.replace(word, "")
         return cleaned.strip()
 
     def __eq__(self, other):

@@ -14,7 +14,35 @@ merge_file = 'README.md'
 html_file = 'index.html'
 markdown_file = 'index.md'
 
+class MatcherTests(unittest.TestCase):
+    def test_strips_the(self):
+        """ strips the prefix the when matching"""
+        assert Title("The Wee Free Men") == Title("Wee Free Men")
 
+    def test_subtitles(self):
+        Title("A Blink of the Screen : collected short fiction") == Title("A Blink of the Screen ")
+
+    def test_strip_a(self):
+        """ strips a when matching """
+        assert Title("A Hat Full of Sky") == Title("Hat Full of Sky")
+
+    def test_removes_and(self):
+        """ we strip '&' from the title, test and verify that removing 'and' will also get a match """
+        assert Title("Johnny and the bomb") == Title("Johnny & the bomb")
+
+    def test_removes_spaces(self):
+        assert Title("Good Omens") == Title("Good  Omens")
+
+    def test_case_sensitivity(self):
+        assert Title("Moving pictures") == Title("Moving Pictures")
+
+    def test_punctuation(self):
+        assert Title("Guards Guards") == Title("Guards! Guards!")
+        assert Title("Arbitrary") == Title("Arbitrary^")
+        assert Title("wheres my cow") == Title("Where's my cow?")
+        # hyphenation cases that we care about
+        assert Title("reaper man") != Title("reaper-man")
+        assert Title("ReaperMan") == Title("reaper-man")
 
 class ImporterTests(unittest.TestCase):
     def test_import_csv(self):
